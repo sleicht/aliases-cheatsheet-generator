@@ -1,4 +1,3 @@
-# Paths to the aliases and gitconfig files
 import os
 
 from aliases_cheatsheet.alias_loader import load_git_aliases, load_shell_aliases
@@ -39,7 +38,7 @@ def main():
     # Write to files
     write_to_markdown_file(document, "aliases.md")
     write_to_html_file(html_content, "aliases.html")
-    write_to_pdf_file(html_content, "aliases.pdf")
+    write_to_pdf_file(document, "aliases.pdf")
 
 
 if __name__ == "__main__":

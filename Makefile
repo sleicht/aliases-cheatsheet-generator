@@ -2,7 +2,7 @@
 VENV_NAME=.venv
 PYTHON=$(VENV_NAME)/bin/python
 PIP=$(VENV_NAME)/bin/pip
-VERSION = $(shell cat VERSION)
+VERSION=$(shell cat VERSION)
 
 # For Windows, use these paths
 # PYTHON=$(VENV_NAME)/Scripts/python
