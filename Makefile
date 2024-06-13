@@ -2,6 +2,7 @@
 VENV_NAME=.venv
 PYTHON=$(VENV_NAME)/bin/python
 PIP=$(VENV_NAME)/bin/pip
+VERSION = $(shell cat VERSION)
 
 # For Windows, use these paths
 # PYTHON=$(VENV_NAME)/Scripts/python
@@ -41,7 +42,17 @@ format: format_deps
 lint: lint_deps
 	$(VENV_NAME)/bin/flake8 .
 
+release: changelog
+	git tag -a v$(VERSION) -m "Release version $(VERSION)"
+	git push origin v$(VERSION)
+	gh release create v$(VERSION) --title "Release version $(VERSION)" --notes-file CHANGELOG.md
+
+changelog:
+	@echo "## Version $(VERSION) - Release Notes" > CHANGELOG.md
+	@echo "" >> CHANGELOG.md
+	@echo "- Initial release with base features" >> CHANGELOG.md
+
 clean:
 	rm -rf $(VENV_NAME) aliases.md aliases.html aliases.pdf
 
-.PHONY: all venv install_deps generate_files install_dev_deps format_deps lint_deps format lint clean
+.PHONY: all venv install_deps generate_files install_dev_deps format_deps lint_deps format lint release changelog clean
